@@ -12,6 +12,8 @@ class GenusController extends Controller
 {
     /**
      * @Route("/genus/{genusName}")
+     * @Method("GET")
+     *
      */
     public function showAction($genusName)
     {
@@ -19,7 +21,20 @@ class GenusController extends Controller
         
         $funFact = $this->get('markdown.parser')
                 ->transform($funFact);
-        
+
+        $genusTrans = [
+            [
+                'name' => 'Djordje',
+                'surname' => 'Stojiljkovic',
+                'phone' => '+381605289528'
+            ],
+            [
+                'name' => 'Ivan',
+                'surname' => 'Markovic',
+                'phone' => '+381605289528'
+            ],
+        ];
+
         //Doctrine caching
         $cache = $this->get('doctrine_cache.providers.my_markdown_cache');
         
@@ -38,6 +53,7 @@ class GenusController extends Controller
         return $this->render('genus/show.html.twig', [
                 'name' => $genusName,
                 'funFact' => $funFact,
+                'genusTrans' => $genusTrans,
         ]);
     }
     
@@ -57,6 +73,6 @@ class GenusController extends Controller
             'notes' => $notes, 
         ];
         
-        return new \Symfony\Component\HttpFoundation\JsonResponse($data);
+        return new JsonResponse($data);
     }
 }

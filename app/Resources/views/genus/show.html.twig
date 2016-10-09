@@ -16,6 +16,11 @@
                 <dd>{{ '99999'|number_format }}</dd>
                 <dt>Fun Fact:</dt>
                 <dd>{{ funFact|raw }}</dd>
+                {% for genus in genusTrans %}
+                    <dd>{{ genus.name }}</dd>
+                    <dd>{{ genus.surname }}</dd>
+                    <dd>{{ genus.phone }}</dd>
+                {% endfor %}
             </dl>
         </div>
     </div>
